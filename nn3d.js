@@ -184,7 +184,7 @@ void main(void) {
 	screen_position = gl_Position;
 } 
 `;
-	
+
 var lines_fragment_shader = `
 uniform vec3 color;
 uniform float surface_level;
@@ -271,7 +271,7 @@ function init() {
 	canvas.id = 'main_canvas';
 	canvas.width = canvas_size;
 	canvas.height = canvas_size;
-	document.getElementById('canvas_container').appendChild( canvas ); 
+	document.getElementById('canvas_container').appendChild( canvas );
 
 	// TODO convert set of lines to a single line?
 	lines_material = new THREE.ShaderMaterial( {
@@ -281,7 +281,7 @@ function init() {
 		blending:       THREE.AdditiveBlending,
 		depthTest:      false,
 		depthWrite:		false,
-		transparent:    true, 
+		transparent:    true,
 		wireframe: 		true,
 	});
 
@@ -291,12 +291,12 @@ function init() {
 			for (var z_i=-size; z_i < size; z_i++) {
 				var lines_geometry = new THREE.Geometry();
 				for (var i = 0; i < 10; i++) {
-					lines_geometry.vertices.push( new THREE.Vector3( x_i + 10 + i * 100, y_i, z_i ) );	
+					lines_geometry.vertices.push( new THREE.Vector3( x_i + 10 + i * 100, y_i, z_i ) );
 				}
 				lines_scene.add( new THREE.Line( lines_geometry, lines_material ) );
 			}
 		}
-	}	
+	}
 
 	helper = new THREE.AxisHelper(5.);
 	helper.material.transparent = true;
@@ -324,7 +324,7 @@ function render( timestamp, skip_request ) {
 	var weights_W = [new THREE.Matrix4(), new THREE.Matrix4()];
 	weights_W[0].elements = Array.prototype.concat.apply([], [W[0], W[1], W[2], W[3]]);
 	weights_W[1].elements = Array.prototype.concat.apply([], [W[4], W[5], W[6], W[7]]);
-	var weights_V = [new THREE.Vector4(V[0][0], V[0][1], V[0][2], V[0][3]), new THREE.Vector4(V[0][4], V[0][5], V[0][6], V[0][7])];	
+	var weights_V = [new THREE.Vector4(V[0][0], V[0][1], V[0][2], V[0][3]), new THREE.Vector4(V[0][4], V[0][5], V[0][6], V[0][7])];
 	dummy_material.uniforms.weights_W.value = weights_W;
 	dummy_material.uniforms.weights_V.value = weights_V;
 
@@ -452,14 +452,14 @@ function createControlsTable() {
 			// swapping y and z for users pleasure
 			var cell_position = [0, 2, 1, 3][i];
 			var cell = control_cells[j+1][cell_position];
-			cell.position_layerij = [0, i, j]; 
+			cell.position_layerij = [0, i, j];
 			cell.classList.add('weight-control');
 		}
 	}
 	// second connection
 	for(var i = 0; i < n_hidden; i++) {
 		var cell = control_cells[i+1][n_input + 1];
-		cell.position_layerij = [1, i, 0]; 
+		cell.position_layerij = [1, i, 0];
 		cell.classList.add('weight-control');
 	}
 
@@ -476,7 +476,7 @@ function createControlsTable() {
 			var delta = e.deltaY || e.detail || e.wheelDelta || 0.;
 			updateWeight(e.target, delta);
 		});
-	} 
+	}
 }
 
 createControlsTable();
@@ -487,8 +487,8 @@ function saveAndDownloadVideo(format){
 	var canvas = document.getElementById('main_canvas');
 	var context = canvas.getContext('webgl');
 
-	capturer = new CCapture( { 
-		format: format, 
+	capturer = new CCapture( {
+		format: format,
 		framerate: 10 * 1.5,
 		verbose: true,
 		workersPath: 'utils/',
