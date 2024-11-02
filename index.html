@@ -20,7 +20,7 @@
 	<meta property="og:description" content="Play with level surfaces of a simple neural network right in your browser" />
 	<meta property="og:url" content="https://arogozhnikov.github.io/3d_nn" />
 	<meta property="og:image" content="https://raw.githubusercontent.com/arogozhnikov/3d_nn/master/images/screen_capture.png" />
-	
+
 	<style type="text/css">
 		body {
 			background-color: black;
@@ -46,7 +46,7 @@
 		#canvas_container canvas{
 			margin: 20px;
 		}
-		
+
 		.control_container{
 			margin-top: 20px;
 			text-align: center;
@@ -75,7 +75,7 @@
 
 		}
 		.button-control:hover{
-			background-color: #777;			
+			background-color: #777;
 		}
 		#randomize_button{
 			background-color: #474;
@@ -103,21 +103,21 @@
 		<h1>Marching neural network</h1>
 		<h2>Visualizing level surfaces of a neural network with raymarching</h2>
 		<p>
-			Artificial neural networks became very popular in recent years, 
+			Artificial neural networks became very popular in recent years,
 			mostly because of their success in tasks of image and speech recognition.
-			Research in this area started more than 60 years ago and many different network architectures were 
+			Research in this area started more than 60 years ago and many different network architectures were
 			developed during first decades of research, the only architecture that became popular in applications is MLP (<a href='https://en.wikipedia.org/wiki/Multilayer_perceptron'>multilayer perceptron</a>)
-			&mdash; parametrized multilayer functions trained (optimized) with variations of gradient descent. 
+			&mdash; parametrized multilayer functions trained (optimized) with variations of gradient descent.
 			Later based on MLP approach of training application-specific architectures emerged (such as convolutional and recurrent networks).
 		</p>
 		<p>
-			Probably it is a good idea to understand the behavior of a neural network by visualizing it. 
-			While dependencies modelled in machine learning, in particular by neural networks, are multidimensional, 
+			Probably it is a good idea to understand the behavior of a neural network by visualizing it.
+			While dependencies modelled in machine learning, in particular by neural networks, are multidimensional,
 			we are limited in our visualization abilities to three dimensions.
 		</p>
 		<p>
-			In the demo below you can play with a very small MLP with three inputs (x, y, z) and observe resulting functions 
-			(just to remind, MLP is a neat function) to see how flexible it is. 
+			In the demo below you can play with a very small MLP with three inputs (x, y, z) and observe resulting functions
+			(just to remind, MLP is a neat function) to see how flexible it is.
 		</p>
 		<p>
 			<strong>Visualization requires not-too-old browser and GPU acceleration. Best on laptops and PCs, but also works on modern mobile devices.</strong>
@@ -127,7 +127,7 @@
 		<div id="canvas_container">
 			<div id='not_working_notification' style="font-size: 1.6em; color: #DAA; ">
 				<p>
-					If you see this message, your browser / device <br /> doesn't support this beautiful demo. 
+					If you see this message, your browser / device <br /> doesn't support this beautiful demo.
 				</p>
 				<p>
 					Try more powerful device!
@@ -135,7 +135,7 @@
 			</div>
 			<!-- canvas is here -->
 		</div>
-		<div class='control_container'>		
+		<div class='control_container'>
 			<div>
 				<h2>Weights of the network</h2>
 				<small>
@@ -150,15 +150,15 @@
 		</div>
 	</div>
 	<div class='control_container'>
-		<label class='control_group'> 
+		<label class='control_group'>
 			<input type="checkbox" name="show_surface_control" id="show_surface_control" checked="checked" />
 			show surface
 		</label>
-		<label class='control_group'> 
+		<label class='control_group'>
 			<input type="checkbox" name="show_sparks_control" id="show_sparks_control" checked="checked" />
 			show sparks
 		</label>
-		<label class='control_group'> 
+		<label class='control_group'>
 			<input type="checkbox" name="show_axes_control" id="show_axes_control" checked="checked" />
 			show axes
 		</label>
@@ -166,62 +166,62 @@
 			<div>
 				<input type="checkbox" checked="checked" name="animate_checkbox" id="animate_checkbox" />
 				<label for="animate_checkbox">animate level of surface</label>
-			</div>			
+			</div>
 			<div class='invisible' id='surface-control-group'>
 				level of surface: <span id='level_display'> </span> <br />
 				<input type="range" name="animate_level" id="animate_level" min="0" max="1" step="0.01"    />
-			</div>			
+			</div>
 		</span>
 	</div>
 	<div class='control_container'>
-		<label class='control_group'> 
+		<label class='control_group'>
 			camera azimuth <br />
 			<input type="range" name="camera_azimuth_control" id="camera_azimuth_control" min="-3.14" max="3.14" step="0.05" value="0.7"   />
 		</label>
-		<label class='control_group'> 
+		<label class='control_group'>
 			camera altitude <br />
-			<input type="range" name="camera_altitide_control" id="camera_altitide_control" min="-1.57" max="1.57" step="0.02" value='0.2'   />			
+			<input type="range" name="camera_altitide_control" id="camera_altitide_control" min="-1.57" max="1.57" step="0.02" value='0.2'   />
 		</label>
 		<span class='button-control' id='makegif_button' >Record a gif! <br/> <small>takes a while</small></span>
 		<span class='button-control' id='makemov_button' >Record a video! <br /> <small>chromium browsers only</small></span>
 	</div>
 
-	<div class='description'>		
+	<div class='description'>
 		<p>
-			In this demonstration you can play with a simple neural network in 3 spacial dimensions 
+			In this demonstration you can play with a simple neural network in 3 spacial dimensions
 			and visualize the functions the network produces (those are quite interesting despite the simplicity of a network, just click 'randomize weights' button several times).
 		</p>
 
 		<p>
-			Animated <strong>surfaces</strong> are level surfaces of a neural network. 
+			Animated <strong>surfaces</strong> are level surfaces of a neural network.
 			You can stop animation and choose level of surface yourself, note that demo shows surfaces with all equidistant levels that differ by integer: <br />
 			f(x) = ... , level-1, level, level+1, ... <br />
 			that is why animation is periodic.
 		</p>
 		<p>
-			Sparks that are following level surfaces demonstrate the regions with rapid change (small gradient), 
+			Sparks that are following level surfaces demonstrate the regions with rapid change (small gradient),
 			sparks' color demonstrates the level of surface they are following (red is higher).
 			As the level is changing, the color of sparks also changes (from blue to red).
 		</p>
 		<h2>Architecture of the network</h2>
 		<p>
 			Network has 4 inputs: 3 spacial inputs (x, y, z) + intercept term (1), 8 hidden neurons in a single hidden layer (h<sub>1</sub>, ..., h<sub>8</sub>) and a single output.
-			Weights of the network are connections between inputs and neurons in a hidden layer, and between neurons in a hidden layer and output. 
+			Weights of the network are connections between inputs and neurons in a hidden layer, and between neurons in a hidden layer and output.
 			Tanh is used as an activation in hidden layer.
 		</p>
 		<h2>Manipulating the network</h2>
 		<p>
-			Circles in the scheme correspond to weights (parmeters) of a network and describe the strength of connection between neurons, red is +1, blue is -1. 
+			Circles in the scheme correspond to weights (parmeters) of a network and describe the strength of connection between neurons, red is +1, blue is -1.
 			You can change the weights: position cursor over any circle and use mouse wheel.
 		</p>
 		<h2>Visualization technique</h2>
 		<p>
-			This demonstration employs a variation of <a href='https://en.wikipedia.org/wiki/Volume_ray_casting'>raymarching technique</a> in computer graphics 
+			This demonstration employs a variation of <a href='https://en.wikipedia.org/wiki/Volume_ray_casting'>raymarching technique</a> in computer graphics
 			(also known as volume ray casting).
 		</p>
 		<p>
-			It is highly recommended to have a good GPU-acceleration to enjoy the picture, 
-			because in raymarching everything is computed with shaders only (and neural network is calculated with shaders as well).  
+			It is highly recommended to have a good GPU-acceleration to enjoy the picture,
+			because in raymarching everything is computed with shaders only (and neural network is calculated with shaders as well).
 		</p>
 		<p>
 			Update: I've simplified the technique to ray-scanning + hord-like method. It is both faster and produces visually more consistent picture.
@@ -231,8 +231,8 @@
 			Inspiration
 		</h2>
 		<p>
-			Inspired by <a href='http://iquilezles.org/www/articles/raymarchingdf/raymarchingdf.htm'>works</a> by Inigo Quilez on raymarching singed distance fields 
-			and his <a href='https://www.shadertoy.com/user/iq'>shadertoy</a> demos. 
+			Inspired by <a href='http://iquilezles.org/www/articles/raymarchingdf/raymarchingdf.htm'>works</a> by Inigo Quilez on raymarching singed distance fields
+			and his <a href='https://www.shadertoy.com/user/iq'>shadertoy</a> demos.
 			And also by Johann Korndorfer's <a href='https://www.youtube.com/watch?v=s8nFqwOho-s'>demo talk at NVScene</a>.
 		</p>
 		<h2>
@@ -255,16 +255,17 @@
 			<a class="github-button" href="https://github.com/arogozhnikov/3d_nn/fork" data-icon="octicon-repo-forked" data-size="large" data-show-count="true" aria-label="Fork arogozhnikov/3d_nn on GitHub">Fork</a>
 			<a class="github-button" href="https://github.com/arogozhnikov" data-size="large" data-show-count="true" aria-label="Follow @arogozhnikov on GitHub">Follow @arogozhnikov</a>
 		</div>
-	
+
 	</div>
 
 	<script src="utils/three.js"></script>
 	<script src='utils/CCapture.all.min.js' ></script>
+	<script src='shaders.js' ></script>
 	<script src='nn3d.js' ></script>
 
 	<!-- Buttons: -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
-	
+
 </body>
 
 </html>
